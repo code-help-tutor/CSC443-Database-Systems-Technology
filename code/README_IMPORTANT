@@ -1,0 +1,30 @@
+This file describe some important complie and execute environment.
+It's highly recommend to follow this file.
+
+1) db_create.cpp -- This program will generate 4 databases specified in the "CSC443_W2019_A1.pdf"
+    I use Ubuntu 16.04 LTS to complie and execute the code.
+        Before you complie my code, make sure sqlite3 is installed. 
+        If you aren't install it, please follow this link https://www.tutorialspoint.com/sqlite/sqlite_installation.htm.
+        please complie with -lsqlite3 command argument.
+    It took me more than 2 hours to generate these four files. So you may suffer a painful wait.
+        I also pasted some images to prove that these four databases were successfully generated.
+
+2) .py file -- This program read .db file and do query also specified in the "CSC443_W2019_A1.pdf"
+    I use Python36 to finish this homework. No other third party library is needed.
+        As the "CSC443_W2019_A1.pdf" said, generated db file should not be included.
+        If you don't want to use my db_create.cpp to generate these databases, you should notice name of these databases.
+        Just open run.py file and modify below code to your newly generated databases' name:
+            line5-->db_file_ls = ['no_index_4kb.db', 'no_index_16kb.db', 'clustered_index_4kb.db', 'unclustered_index_4kb.db']
+            and everything will be fine.
+    I list my code structure below to help you better understand my program.
+    --run.py    Main entry. This file define query requirement such as Scan operation, Equality Search and Range Seach. 
+                You can modify line6~10 code to change some conditions.
+    --query.py  Used by run.py. This file read .db file and search operation passed by run.py 
+                and follow the https://www.sqlite.org/fileformat.html to do the operation.
+    --Employee.py   Used by query.py. This file parse payload in a cell into an Employee entity(Like a line in "500000 Records.csv").
+    --EmployeeIndex.py Used by query.py. This file also parse payload in a cell into an EmployeeIndex entity.
+                        This entity is used when unclustered_index_4kb.db as the data source.
+    --SqliteMaster.py Used by query.py. payload into sqlite_master table element. See https://www.sqlite.org/fileformat.html for detail.
+    --tools.py  Used by above all .py files expect run.py. Provide some use for function like convert varint to int and parse payload
+
+Best wishes!!!
